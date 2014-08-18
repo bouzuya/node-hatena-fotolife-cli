@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+
+var commander = require('commander-b');
+var fotolife = require('hatena-fotolife-api');
+var Promise = require('q').Promise;
+var path = require('path');
+
+var newClient = function() {
+  return fotolife({
+    type: 'wsse',
+    username: process.env.HATENA_USERNAME,
+    apikey: process.env.HATENA_APIKEY
+  });
+};
+
+var getVersion = function() {
+  var packageJsonPath = path.resolve(__dirname, './../package.json');
+  var packageJson = require(packageJsonPath);
+  return packageJson.version
+};
+
+var formatEntry = function(e) {
+  var title = e.title[0];
+  var url = e.link.filter(function(l) {
+    return l.$.rel === 'alternate';
+  })[0].$.href;
+  return ['title: ' + title, 'url: ' + url].join('\n')
+};
+
+var command = commander()
+var program = command.version(getVersion());
+
+program
+.command('upload <file>', 'upload a photo')
+.option('-t, --title <title>', 'title')
+.action(function(file, options) {
+  return new Promise(function(resolve, reject) {
+    var client = newClient();
+    var params = { file: file };
+    if (options.title) {
+      params.title = options.title;
+    }
+    client.create(params, function(err, res) {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        console.log(formatEntry(res.entry));
+        resolve(res);
+      }
+    });
+  });
+});
+
+program
+.command('list', 'list uploaded photos')
+.action(function() {
+  return new Promise(function(resolve, reject) {
+    var client = newClient();
+    client.index(function(err, res) {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(res.feed.entry.map(formatEntry).join('\n'));
+        resolve(res);
+      }
+    });
+  });
+});
+
+program
+.command('info <id>', 'view a photo info')
+.action(function(id) {
+  return new Promise(function(resolve, reject) {
+    var client = newClient();
+    client.show({ id: id }, function(err, res) {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        console.log(formatEntry(res.entry));
+        resolve(res);
+      }
+    });
+  });
+});
+
+program
+.command('delete <id>', 'delete a photo')
+.action(function(id) {
+  return new Promise(function(resolve, reject) {
+    var client = newClient();
+    client.destroy({ id: id }, function(err) {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+});
+
+program.execute();
