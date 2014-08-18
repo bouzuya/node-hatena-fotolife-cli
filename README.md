@@ -2,6 +2,8 @@
 
 [Hatena::Fotolife][fotolife] command life interface (unofficial).
 
+![](http://img.f.hatena.ne.jp/images/fotolife/b/bouzuya/20140818/20140818234149.gif)
+
 ## Installation
 
     $ npm install -g hatena-fotolife-cli
