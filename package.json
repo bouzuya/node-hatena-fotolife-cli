@@ -1,6 +1,6 @@
 {
   "name": "hatena-fotolife-cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Hatena::Fotolife command line interface (unofficial)",
   "scripts": {
     "test": "exit 0"
