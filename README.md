@@ -34,6 +34,9 @@
     title: special bouzuya icon
     url: http://f.hatena.ne.jp/bouzuya/20140818181135
 
+    $ # update a photo
+    $ hatena-fotolife update --title 'icon' 20140818181135
+
     $ # delete a photo
     $ hatena-fotolife delete 20140818181135
 

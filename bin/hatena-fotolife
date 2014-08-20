@@ -69,6 +69,31 @@ program
 });
 
 program
+.command('update <id>', 'view a photo info')
+.option('-t, --title <title>', 'title')
+.action(function(id, options) {
+  return new Promise(function(resolve, reject) {
+    if (!options.title) {
+      var msg = 'title is required';
+      console.error(msg);
+      return reject(new Error(msg));
+    }
+    var client = newClient();
+    client.update({
+      id: id,
+      title: options.title
+    }, function(err, res) {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    });
+  });
+});
+
+program
 .command('info <id>', 'view a photo info')
 .action(function(id) {
   return new Promise(function(resolve, reject) {
