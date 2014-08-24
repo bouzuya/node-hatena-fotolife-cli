@@ -2,7 +2,6 @@
 
 var commander = require('commander-b');
 var fotolife = require('hatena-fotolife-api');
-var Promise = require('q').Promise;
 var path = require('path');
 
 var newClient = function() {
@@ -34,37 +33,26 @@ program
 .command('upload <file>', 'upload a photo')
 .option('-t, --title <title>', 'title')
 .action(function(file, options) {
-  return new Promise(function(resolve, reject) {
-    var client = newClient();
-    var params = { file: file };
-    if (options.title) {
-      params.title = options.title;
-    }
-    client.create(params, function(err, res) {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        console.log(formatEntry(res.entry));
-        resolve(res);
-      }
-    });
+  var client = newClient();
+  var params = { file: file };
+  if (options.title) {
+    params.title = options.title;
+  }
+  return client.create(params).then(function(res) {
+    console.log(formatEntry(res.entry));
+  }, function(err) {
+    console.error(err);
   });
 });
 
 program
 .command('list', 'list uploaded photos')
 .action(function() {
-  return new Promise(function(resolve, reject) {
-    var client = newClient();
-    client.index(function(err, res) {
-      if (err) {
-        reject(err);
-      } else {
-        console.log(res.feed.entry.map(formatEntry).join('\n'));
-        resolve(res);
-      }
-    });
+  var client = newClient();
+  return client.index().then(function(res) {
+    console.log(res.feed.entry.map(formatEntry).join('\n'));
+  }, function(err) {
+    reject(err);
   });
 });
 
@@ -72,57 +60,41 @@ program
 .command('update <id>', 'view a photo info')
 .option('-t, --title <title>', 'title')
 .action(function(id, options) {
-  return new Promise(function(resolve, reject) {
-    if (!options.title) {
-      var msg = 'title is required';
-      console.error(msg);
-      return reject(new Error(msg));
-    }
-    var client = newClient();
-    client.update({
-      id: id,
-      title: options.title
-    }, function(err, res) {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    });
+  if (!options.title) {
+    var msg = 'title is required';
+    console.error(msg);
+    return reject(new Error(msg));
+  }
+  var client = newClient();
+  return client.update({
+    id: id,
+    title: options.title
+  }).then(null, function(err) {
+    console.error(err);
   });
 });
 
 program
 .command('info <id>', 'view a photo info')
 .action(function(id) {
-  return new Promise(function(resolve, reject) {
-    var client = newClient();
-    client.show({ id: id }, function(err, res) {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        console.log(formatEntry(res.entry));
-        resolve(res);
-      }
-    });
+  var client = newClient();
+  return client.show({
+    id: id
+  }).then(function(res) {
+    console.log(formatEntry(res.entry));
+  }, function(err) {
+    console.error(err);
   });
 });
 
 program
 .command('delete <id>', 'delete a photo')
 .action(function(id) {
-  return new Promise(function(resolve, reject) {
-    var client = newClient();
-    client.destroy({ id: id }, function(err) {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
+  var client = newClient();
+  return client.destroy({
+    id: id
+  }).then(null, function(err) {
+    console.error(err);
   });
 });
 
