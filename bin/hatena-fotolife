@@ -19,7 +19,7 @@ var getVersion = function() {
 };
 
 var formatEntry = function(e) {
-  var title = e.title[0];
+  var title = e.title._;
   var url = e.link.filter(function(l) {
     return l.$.rel === 'alternate';
   })[0].$.href;
