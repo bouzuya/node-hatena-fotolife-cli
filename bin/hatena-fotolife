@@ -20,11 +20,12 @@ var getVersion = function() {
 
 var formatEntry = function(e) {
   var title = e.title._;
-  var url = e.link.filter(function(l) {
+  var u = e.link.filter(function(l) {
     return l.$.rel === 'alternate';
   })[0].$.href;
   // 'http://f.st-hatena.com/images/fotolife/b/bouzuya/20140920/20140920003331.gif?1411140816'
   // => 'http://img.f.hatena.ne.jp/images/fotolife/b/bouzuya/20140920/20140920003331.gif'
+  var urlString = e['hatena:imageurl']._;
   var url = require('url');
   var parsed = url.parse(urlString);
   parsed.host = 'img.f.hatena.ne.jp';
@@ -32,7 +33,7 @@ var formatEntry = function(e) {
   var formatted = url.format(parsed);
   return [
     'title: ' + title,
-    'url: ' + url,
+    'url: ' + u,
     'imageurl: ' + formatted
   ].join('\n');
 };
