@@ -1,35 +1,35 @@
 {
   "name": "hatena-fotolife-cli",
-  "version": "0.3.1",
   "description": "Hatena::Fotolife command line interface (unofficial)",
-  "scripts": {
-    "test": "exit 0"
-  },
-  "bin": {
-    "hatena-fotolife": "./bin/hatena-fotolife"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/bouzuya/node-hatena-fotolife-cli.git"
-  },
-  "keywords": [
-    "hatena",
-    "hatena-fotolife",
-    "command",
-    "cli"
-  ],
+  "version": "0.3.1",
   "author": {
     "name": "bouzuya",
     "mail": "m@bouzuya.net",
     "url": "http://bouzuya.net"
   },
-  "license": "MIT",
+  "bin": {
+    "hatena-fotolife": "./bin/hatena-fotolife"
+  },
   "bugs": {
     "url": "https://github.com/bouzuya/node-hatena-fotolife-cli/issues"
   },
-  "homepage": "https://github.com/bouzuya/node-hatena-fotolife-cli",
   "dependencies": {
     "commander-b": "^0.2.1",
     "hatena-fotolife-api": "^0.4.0"
+  },
+  "homepage": "https://github.com/bouzuya/node-hatena-fotolife-cli",
+  "keywords": [
+    "cli",
+    "command",
+    "hatena",
+    "hatena-fotolife"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bouzuya/node-hatena-fotolife-cli.git"
+  },
+  "scripts": {
+    "test": "exit 0"
   }
 }
