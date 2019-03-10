@@ -17,6 +17,11 @@
     "commander-b": "^0.2.1",
     "hatena-fotolife-api": "^0.4.0"
   },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "purescript": "^0.12.3",
+    "spago": "^0.7.0"
+  },
   "files": [
     "bin"
   ],
