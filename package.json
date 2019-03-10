@@ -38,6 +38,7 @@
     "url": "git://github.com/bouzuya/node-hatena-fotolife-cli.git"
   },
   "scripts": {
+    "spago": "spago",
     "test": "exit 0"
   }
 }
