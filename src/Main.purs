@@ -4,9 +4,12 @@ module Main
 
 import Prelude
 
+import Data.Array as Array
 import Data.Maybe (Maybe)
+import Data.Maybe as Maybe
 import Effect (Effect)
 import Effect.Console as Console
+import Effect.Exception as Exception
 import Foreign.Object as Object
 import Node.Process as Process
 
@@ -25,5 +28,8 @@ loadConfig = do
 
 main :: Effect Unit
 main = do
-  config <- loadConfig
+  args <- map (Array.drop 2) Process.argv
+  Console.logShow args
+  configMaybe <- loadConfig
+  config <- Maybe.maybe (Exception.throw "invalid config") pure configMaybe
   Console.logShow config
