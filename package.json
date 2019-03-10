@@ -38,7 +38,13 @@
     "url": "git://github.com/bouzuya/node-hatena-fotolife-cli.git"
   },
   "scripts": {
+    "build": "spago build",
+    "bundle": "spago make-module",
+    "docs": "spago sources | xargs purs docs --format html 'src/**/*.purs'",
+    "prepare": "npm-run-all -s build bundle",
+    "purs": "purs",
+    "repl": "spago repl",
     "spago": "spago",
-    "test": "exit 0"
+    "test": "spago test"
   }
 }

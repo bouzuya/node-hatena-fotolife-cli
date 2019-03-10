@@ -1,3 +1,9 @@
-/*.log
 /*.tgz
-/node_modules
+/.cache/
+/.env*
+/.psc*
+/.spago/
+/generated-docs/
+/index.js
+/node_modules/
+/output/
