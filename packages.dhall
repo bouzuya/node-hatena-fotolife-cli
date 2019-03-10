@@ -114,8 +114,11 @@ let mkPackage =
 let upstream =
       https://raw.githubusercontent.com/purescript/package-sets/psc-0.12.3-20190227/src/packages.dhall sha256:eb8ae389eb218f1aad4c20054b8cce6c04a861a567aff72abd9111609178e986
 
+let bouzuya =
+      https://raw.githubusercontent.com/bouzuya/purescript-bouzuya-packages/20190308/bouzuya.dhall sha256:c511e931481b5cd641c19ff3bfda3fd74aa681f7a05f0ef3956bd056962b7037
+
 let overrides = {=}
 
-let additions = {=}
+let additions = {=} // bouzuya
 
 in  upstream ⫽ overrides ⫽ additions
