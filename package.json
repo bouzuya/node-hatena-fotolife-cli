@@ -17,6 +17,9 @@
     "commander-b": "^0.2.1",
     "hatena-fotolife-api": "^0.4.0"
   },
+  "files": [
+    "bin"
+  ],
   "homepage": "https://github.com/bouzuya/node-hatena-fotolife-cli",
   "keywords": [
     "cli",
