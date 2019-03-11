@@ -1,7 +1,7 @@
 {
   "name": "hatena-fotolife-cli",
   "description": "Hatena::Fotolife command line interface (unofficial)",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "author": {
     "name": "bouzuya",
     "mail": "m@bouzuya.net",
