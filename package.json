@@ -32,6 +32,7 @@
     "hatena-fotolife"
   ],
   "license": "MIT",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/bouzuya/node-hatena-fotolife-cli.git"
