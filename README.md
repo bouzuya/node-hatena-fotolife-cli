@@ -14,8 +14,8 @@
     $ hatena-fotolife --help
 
     $ # configure
-    $ export HATENA_USERNAME='username'
-    $ export HATENA_APIKEY='apikey'
+    $ export HATENA_ID='username'
+    $ export HATENA_API_KEY='apikey'
 
     $ # upload a photo
     $ hatena-fotolife upload --title 'special bouzuya icon' ./bouzuya.png
