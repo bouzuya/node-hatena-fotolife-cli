@@ -35,4 +35,4 @@ command client args = do
       pure
       (Array.index arguments 0)
   response <- client `Client.update` (Record.merge options { id })
-  Console.log (Client.showResponse response)
+  Console.log "updated"
