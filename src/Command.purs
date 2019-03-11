@@ -9,6 +9,11 @@ module Command
 import Prelude
 
 import Client (Client)
+import Command.Delete as CommandDelete
+import Command.Info as CommandInfo
+import Command.List as CommandList
+import Command.Update as CommandUpdate
+import Command.Upload as CommandUpload
 import Data.Array as Array
 import Data.Enum (class BoundedEnum, class Enum)
 import Data.Enum as Enum
@@ -44,18 +49,15 @@ instance ordCommand :: Ord Command where
 instance showCommand :: Show Command where
   show (Command n _ _) = "(Command " <> n <> ")"
 
-noop :: Client -> Array String -> Aff Unit
-noop _ _ = pure unit
-
 commands :: Array Command
 commands =
   Array.sortWith
     name
-    [ Command "delete" "delete a photo" noop -- TODO
-    , Command "info" "view a photo info" noop -- TODO
-    , Command "list" "list uploaded photos" noop -- TODO
-    , Command "update" "update a photo info" noop -- TODO
-    , Command "upload" "upload a photo" noop -- TODO
+    [ Command "delete" "delete a photo" CommandDelete.command
+    , Command "info" "view a photo info" CommandInfo.command
+    , Command "list" "list uploaded photos" CommandList.command
+    , Command "update" "update a photo info" CommandUpdate.command
+    , Command "upload" "upload a photo" CommandUpload.command
     ]
 
 description :: Command -> String

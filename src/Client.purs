@@ -6,6 +6,8 @@ module Client
   , index
   , newClient
   , show
+  , showListResponse
+  , showResponse
   , update
   ) where
 
@@ -19,6 +21,8 @@ foreign import data Response :: Type
 foreign import construct :: forall r. { | r } -> Effect Client
 foreign import callMethod ::
   forall r. String -> Client -> { | r } -> Effect (Promise Response)
+foreign import showListResponse :: Response -> String
+foreign import showResponse :: Response -> String
 
 create :: Client -> { file :: String, title :: String } -> Aff Response
 create client params = Aff.toAffE (callMethod "create" client params)
