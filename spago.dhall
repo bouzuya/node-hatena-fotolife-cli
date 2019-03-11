@@ -11,6 +11,7 @@ You can edit this file as you like.
     , "effect"
     , "maybe"
     , "node-process"
+    , "test-unit"
     ]
 , packages =
     ./packages.dhall
